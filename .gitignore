@@ -1,0 +1,28 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# React build
+fronted/build/
+fronted/.cache/
+
+# Environment variables
+.env
+
+# Logs
+*.log
+logs/
+debug.log
+
+# Database
+*.sql
+*.sqlite
+__pycache__/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
