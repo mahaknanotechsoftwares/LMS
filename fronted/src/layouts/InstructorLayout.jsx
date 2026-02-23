@@ -2,21 +2,18 @@
 
 
 import React from "react";
-import Header from " ../components/layout/Header";
-import Sidebar from " ../components/layout/Sidebar";
+import Navbar from "../components/common/layout/Navbar";
+import Sidebar from "../components/common/layout/Sidebar";
 
-const InstructorLayout = ( { children } ) => {
-  return (
-    <div className="flex h-screen bg-gray-50">
-    
-      <Sidebar role=" instructor" />
-
-      
-      <div className=" flex-1 flex flex-col">
-        <Header role=" instructor" />
-        <main className="p-6 flex-1 overflow-auto"> {children} </main>
+const InstructorLayout = ({ children }) => {
+     return (
+   <div>
+       <Navbar />
+         <div style={{ display: "flex" }}>
+        <Sidebar />
+    <main style={{ padding: "20px", flex: 1 }}>{children}</main>
       </div>
-    </div>
+     </div>
   );
 };
 
