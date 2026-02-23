@@ -18,7 +18,7 @@ const Login = () => {
        <form onSubmit ={handleSubmit }>
          <div style ={{ marginBottom: "10px" }}>
           <label>Email:</label>
-          <input
+     <input
             type="email"
              placeholder ="Enter your email"
               value ={email} 
@@ -26,18 +26,22 @@ const Login = () => {
              style ={{ width: "100%", padding: "8px", marginTop: "5px" }}
             required
           />
-          </div>
-          <div style={{ marginBottom: "10px" }}>
+              </div>
+
+
+   <div style={{ marginBottom: "10px" }}>
            <label>Password:</label>
-           <input
+                 <input
             type="password"
-              placeholder="Enter your password"
+                 placeholder="Enter your password"
              value ={password}
              onChange ={(e) => setPassword(e.target.value)}
-             style ={{ width: "100%", padding: "8px", marginTop: "5px" }}
+                 style ={{ width: "100%", padding: "8px", marginTop: "5px" }}
             required
        />
-     </div>
+
+
+</div>
            <button
             type="submit"
              style ={{ padding: "10px 20px", cursor: "pointer" }}
