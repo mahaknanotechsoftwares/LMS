@@ -1,11 +1,22 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
+const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 
-const User = sequelize.define('User', {
-  id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-  name: { type: DataTypes.STRING, allowNull: false },
-  email: { type: DataTypes.STRING, unique: true, allowNull: false },
-  role: { type: DataTypes.ENUM('student','instructor','admin'), allowNull: false }
+const userSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  role: { type: String, enum: ['student', 'instructor', 'admin', 'support'], default: 'student' },
+  password: { type: String, required: true },
+}, { timestamps: true });
+
+// Password hashing middleware
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) return next();
+  this.password = await bcrypt.hash(this.password, 10);
+  next();
 });
 
-module.exports = User;
+userSchema.methods.matchPassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
+};
+
+module.exports = mongoose.model('User', userSchema);
