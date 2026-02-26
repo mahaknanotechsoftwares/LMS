@@ -31,5 +31,28 @@ const authorize = (...roles) => {
     next();
   };
 };
+// Ensure user is authenticated
+const protect = (req, res, next) => {
+  if (!req.user) {
+    return res.status(401).json({ error: "Not authorized" });
+  }
+  next();
+};
 
-module.exports = { authenticate, authorize };
+// Ensure user is instructor
+const instructorOnly = (req, res, next) => {
+  if (req.user.role !== "instructor") {
+    return res.status(403).json({ error: "Access denied: Instructor only" });
+  }
+  next();
+};
+
+//Ensure user is admin
+const adminOnly = (req, res, next) => {
+  if (req.user.role !== "admin") {
+    return res.status(403).json({ error: "Access denied: Admin only" });
+  }
+  next();
+};
+
+module.exports = { authenticate, authorize, protect, instructorOnly, adminOnly };
